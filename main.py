@@ -4,9 +4,10 @@ import plotly.express as px
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
-from sklearn.ensemble import RandomForestClassifier  # Import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 import mlflow
 import mlflow.sklearn
+import pickle  # Import the pickle module
 
 # Load Iris dataset
 data = pd.read_csv('data/iris.csv')
@@ -52,7 +53,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 models = {
     'K-Nearest Neighbors': KNeighborsClassifier(),
     'Support Vector Machine': SVC(),
-    'Random Forest Classifier': RandomForestClassifier()  # Add RandomForestClassifier
+    'Random Forest Classifier': RandomForestClassifier()
 }
 
 # User selects a model
@@ -87,6 +88,10 @@ with mlflow.start_run():
     # Log metrics to MLflow
     mlflow.log_param("prediction", data[data['Species'] == prediction[0]]['Sepal_Length'].values[0])
 
+    # Pickle the model and save it to a file
+    with open("models/model.pkl", "wb") as f:
+        pickle.dump(model, f)
+
 # Visualization
 st.subheader("Visualization")
 
@@ -109,3 +114,7 @@ st.plotly_chart(bar_fig)
 st.subheader("Line Plot:")
 line_fig = px.line(data, x='Petal_Width', y='Sepal_Width', color='Species')
 st.plotly_chart(line_fig)
+
+
+# Set MLflow Tracking URI
+st.markdown("[DAGsHub Repository](https://dagshub.com/Mayankvlog/iris_ok.mlflow)")
