@@ -1,0 +1,5 @@
+outs:
+- md5: aaa08c4ff49d042950efca5b208654a6
+  size: 4821
+  hash: md5
+  path: iris.csv
