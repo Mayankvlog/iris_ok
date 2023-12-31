@@ -27,7 +27,7 @@ scatter Plot, Pie Plot, Bar Plot, and Line Plot are incorporated for information
 
 MLflow Following
 The MLflow UI can be gotten to see the investigation subtleties and model ancient rarities.
-DAGsHub Store gives a cooperative space to the undertaking.
+
 MLFLOW_TRACKING_URI=https://dagshub.com/Mayankvlog/iris_ok.mlflow \
 MLFLOW_TRACKING_USERNAME=Mayankvlog \
 MLFLOW_TRACKING_PASSWORD=a163dc11889cf8831384598f795e7c53cd54b1d2 \
