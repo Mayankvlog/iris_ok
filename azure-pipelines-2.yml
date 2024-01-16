@@ -25,7 +25,6 @@ steps:
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
--
 - task: Xcode@5
   inputs:
     actions: 'build'
