@@ -25,14 +25,8 @@ steps:
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
-- task: Maven@4
+-
+- task: Xcode@5
   inputs:
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    testRunTitle: 'iris'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    actions: 'build'
+    packageApp: false
