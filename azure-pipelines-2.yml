@@ -24,7 +24,15 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
-- task: DotNetCoreCLI@2
+
+- task: Maven@4
   inputs:
-    command: 'build'
-    projects: 'https://github.com/Mayankvlog/iris_ok/tree/master'
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testRunTitle: 'iris'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
