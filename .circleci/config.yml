@@ -65,9 +65,6 @@ jobs:
           paths:
             - models/
 
-      - store_artifacts:
-          path:
-            - models/
 
 workflows:
   version: 2
