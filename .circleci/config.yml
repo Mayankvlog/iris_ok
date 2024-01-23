@@ -74,13 +74,10 @@ workflows:
             branches:
               only:
                 - master
-      - store_artifacts:
+      - deploy:
           requires:
             - test_and_deploy
           filters:
             branches:
               only:
                 - master
-          paths:
-            - models/
-
