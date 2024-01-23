@@ -20,6 +20,10 @@ jobs:
           command: |
             python -m unittest discover tests/
 
+      - store_artifacts:
+          path: /app/models
+          destination: /artifacts
+
   deploy:
     docker:
       - image: python:3.8
