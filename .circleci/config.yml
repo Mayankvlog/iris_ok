@@ -35,6 +35,12 @@ jobs:
             # Add deployment commands here
             # e.g., deploy your app using a specific script or command
 
+      - persist_to_workspace:
+          root: /app
+          paths:
+            - models/
+
+
 workflows:
   version: 2
   build_and_deploy:
