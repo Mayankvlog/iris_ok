@@ -1,1 +1,86 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: python:3.8
+
+    working_directory: /app
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements.txt
+
+      - run:
+          name: Run tests
+          command: |
+            python -m unittest discover tests/
+
+  deploy:
+    docker:
+      - image: python:3.8
+
+    working_directory: /app
+
+    steps:
+      - checkout
+
+      - run:
+          name: Deploy to Production
+          command: |
+            # Add deployment commands here
+            # e.g., deploy your app using a specific script or command
+
+  test_and_deploy:
+    docker:
+      - image: python:3.8
+
+    working_directory: /app
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements.txt
+
+      - run:
+          name: Run tests
+          command: |
+            python -m unittest discover tests/
+
+      - run:
+          name: Deploy to Production
+          command: |
+            # Add deployment commands here
+            # e.g., deploy your app using a specific script or command
+
+      - persist_to_workspace:
+          root: /app
+          paths:
+            - models/
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - test_and_deploy:
+          filters:
+            branches:
+              only:
+                - master
+      - store_artifacts:
+          requires:
+            - test_and_deploy
+          filters:
+            branches:
+              only:
+                - master
+          paths:
+            - models/
 
