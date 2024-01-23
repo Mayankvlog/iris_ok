@@ -1,1 +1,50 @@
 
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: python:3.8
+
+    working_directory: /app
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements.txt
+
+      - run:
+          name: Run tests
+          command: |
+            python -m unittest discover tests/
+
+  deploy:
+    docker:
+      - image: python:3.8
+
+    working_directory: /app
+
+    steps:
+      - checkout
+
+      - run:
+          name: Deploy to Production
+          command: |
+            # Add deployment commands here
+            # e.g., deploy your app using a specific script or command
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
