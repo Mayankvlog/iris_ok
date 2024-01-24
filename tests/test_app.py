@@ -1,5 +1,4 @@
 import unittest
-from unittest import TestCase
 import pandas as pd
 import streamlit as st
 from main import user_input_features
