@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            streamlit run python  unittest discover tests/
+            streamlit run python -m unittest discover tests/
 
       - store_artifacts:
           path: /app/models
@@ -56,7 +56,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            streamlit run python  unittest discover tests/
+            streamlit run python -m unittest discover tests/
 
       - run:
           name: Deploy to Production
