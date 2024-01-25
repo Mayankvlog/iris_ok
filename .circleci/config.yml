@@ -24,7 +24,7 @@ jobs:
           path: /app/models
 
       - store_test_results:
-          path: test-report
+          path: /test-report
 
   deploy:
     docker:
