@@ -15,9 +15,18 @@ jobs:
           command: |
             pip install -r requirements.txt
 
+       - run:
+          name: Run tests and generate coverage report
+          command: |
+            coverage run -m unittest discover tests/
+            coverage html -d coverage_html
+
+
       - store_artifacts:
-          path: /app/models
-          destination: /artifacts
+          root: /app
+          path:
+            - models/
+            - coverage_html/
 
   deploy:
     docker:
@@ -58,10 +67,11 @@ jobs:
           root: /app
           paths:
             - models/
+            - coverage_html/
 
       - store_test_results:
           path: /app/test-report
-
+          
   create_dummy_artifacts:
     docker:
       - image: alpine
