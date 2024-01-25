@@ -91,7 +91,7 @@ workflows:
             branches:
               only:
                 - master
-      - create_dummy_artifacts:  # Added the job to create dummy artifacts
+      - create_dummy_artifacts:  
           requires:
             - test_and_deploy
           filters:
