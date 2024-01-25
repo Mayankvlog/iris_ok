@@ -20,9 +20,6 @@ jobs:
           path: /app/models
           destination: /artifacts
 
-      - store_artifacts:
-          path: /app/models
-
   deploy:
     docker:
       - image: python:3.8
