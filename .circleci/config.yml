@@ -64,6 +64,19 @@ jobs:
       - store_test_results:
           path: /app/test-report
 
+ create_dummy_artifacts:
+    docker:
+      - image: alpine
+
+    working_directory: /dummy
+
+    steps:
+      - run:
+          name: Creating Dummy Artifacts
+          command: |
+            mkdir -p /dummy/artifacts
+            echo "Dummy Artifact Content" > /dummy/artifacts/dummy.txt
+
 
 workflows:
   version: 2
@@ -75,6 +88,14 @@ workflows:
               only:
                 - master
       - deploy:
+          requires:
+            - test_and_deploy
+          filters:
+            branches:
+              only:
+                - master
+                
+       - create_dummy_artifacts:  
           requires:
             - test_and_deploy
           filters:
