@@ -15,7 +15,7 @@ jobs:
           command: |
             pip install -r requirements.txt
 
-       - run:
+      - run:
           name: Run tests and generate coverage report
           command: |
             coverage run -m unittest discover tests/
