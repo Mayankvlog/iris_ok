@@ -87,6 +87,7 @@ jobs:
 
 workflows:
   build_and_test_deploy:
+  version : 2
     jobs:
       - build
       - test_and_deploy:
