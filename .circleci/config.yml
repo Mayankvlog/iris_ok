@@ -68,7 +68,7 @@ jobs:
 
       - run:
           name: Debug Workspace Content
-          command: ls -R /app  # Correct indentation
+          command: ls -R /app  
 
       - persist_to_workspace:
           root: /app
@@ -78,7 +78,7 @@ jobs:
             - test-report/
 
       - store_test_results:
-          path: /test-report
+          path: /app/test-report
 
   create_dummy_artifacts:
     docker:
