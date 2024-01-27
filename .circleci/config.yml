@@ -78,7 +78,7 @@ jobs:
             - test-report/
 
       - store_test_results:
-          path: /app/test-report
+          path: /test-report
 
   create_dummy_artifacts:
     docker:
