@@ -68,6 +68,7 @@ jobs:
           paths:
             - models/
             - coverage_html/
+            - test-report/
 
       - store_test_results:
           path: /app/test-report
