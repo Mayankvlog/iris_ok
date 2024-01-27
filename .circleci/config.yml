@@ -21,6 +21,11 @@ jobs:
             coverage run -m unittest discover tests/
             coverage html -d coverage_html
 
+      - run:
+          name: Create test-report directory
+          command: mkdir -p /app/test-report/
+
+
       - persist_to_workspace:
           root: /app
           paths:
