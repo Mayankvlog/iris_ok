@@ -65,6 +65,11 @@ jobs:
             # e.g., deploy your app using a specific script or command
 
       - run:
+          name: Debug Environment
+          command: env
+
+
+      - run:
           name: Create test-report directory
           command: mkdir -p /app/test-report/
 
@@ -75,11 +80,6 @@ jobs:
       - run:
           name: Debug Coverage Data
           command: ls -la /app
-
-      - run:
-          name: Debug Environment
-          command: env
-
 
       - persist_to_workspace:
           root: /app
