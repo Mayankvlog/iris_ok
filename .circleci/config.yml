@@ -71,8 +71,8 @@ jobs:
           command: ls -R /app/test-report
 
       - run:
-        name: Debug Coverage Data
-        command: ls -la /app
+          name: Debug Coverage Data
+          command: ls -la /app
 
       - persist_to_workspace:
           root: /app
