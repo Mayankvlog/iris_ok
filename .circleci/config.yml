@@ -64,7 +64,7 @@ jobs:
 
       - run:
           name: Create test-report directory
-          command: mkdir -p /app/test-report/
+          command: mkdir -p /app/test-report
 
       - run:
           name: Debug test Results Content
