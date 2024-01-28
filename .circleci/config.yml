@@ -70,7 +70,7 @@ jobs:
 
       - run:
           name: Debug test Results Content
-          command: ls -R /app/test-report/test-results.xml
+          command: ls -R /app/test-report
 
       - run:
           name: Debug Coverage Data
