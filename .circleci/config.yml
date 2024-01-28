@@ -65,11 +65,6 @@ jobs:
             # e.g., deploy your app using a specific script or command
 
       - run:
-          name: Debug Environment
-          command: env
-
-
-      - run:
           name: Create test-report directory
           command: mkdir -p /app/test-report/
 
