@@ -48,7 +48,7 @@ jobs:
     docker:
       - image: python:3.8
 
-    working_directory: /app
+    working_directory: /app/test-report/test-results.xml
 
     steps:
       - checkout
