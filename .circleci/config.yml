@@ -66,11 +66,11 @@ jobs:
 
       - run:
           name: Create test-report directory
-          command: mkdir -p /app/test-report
+          command: mkdir -p /app/test-report/
 
       - run:
           name: Debug test Results Content
-          command: ls -R /app/test-report
+          command: ls -R /app/test-report/
 
       - run:
           name: Debug Coverage Data
@@ -84,7 +84,7 @@ jobs:
             - test-report/
 
       - store_test_results:
-          path: /app/test-report
+          path: /app/test-report/
           # working_directory: /app
 
   create_dummy_artifacts:
