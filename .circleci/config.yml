@@ -76,6 +76,11 @@ jobs:
           name: Debug Coverage Data
           command: ls -la /app
 
+      - run:
+          name: Debug Environment
+          command: env
+
+
       - persist_to_workspace:
           root: /app
           paths:
