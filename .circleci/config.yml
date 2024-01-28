@@ -84,8 +84,7 @@ jobs:
             - test-report/
 
       - store_test_results:
-          path: ./reports
-          #path: /app/test-report
+          path: /app/test-report/test-results.xml
           # working_directory: /app
 
   create_dummy_artifacts:
