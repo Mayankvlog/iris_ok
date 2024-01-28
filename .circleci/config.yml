@@ -68,7 +68,7 @@ jobs:
 
       - run:
           name: Debug test Results Content
-          command: ls -R /app/test-report
+          command: ls -R /app
 
       - run:
           name: Debug Coverage Data
