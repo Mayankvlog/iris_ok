@@ -48,7 +48,7 @@ jobs:
     docker:
       - image: python:3.8
 
-    working_directory: /app/test-report/test-results.xml
+    working_directory: /app
 
     steps:
       - checkout
@@ -85,7 +85,7 @@ jobs:
 
       - store_test_results:
           path: /app/test-report/
-          working_directory: /app/test-report/test-results.xml
+          # working_directory: /app/test-report/test-results.xml
 
   create_dummy_artifacts:
     docker:
