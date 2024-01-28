@@ -68,7 +68,7 @@ jobs:
 
       - run:
           name: Debug Workspace Content
-          command: ls -R /app  
+          command: ls -R /app/test-report
 
       - persist_to_workspace:
           root: /app
