@@ -67,7 +67,7 @@ jobs:
           command: mkdir -p /app/test-report/
 
       - run:
-          name: Debug Workspace Content
+          name: Debug test Results Content
           command: ls -R /app/test-report
 
       - persist_to_workspace:
