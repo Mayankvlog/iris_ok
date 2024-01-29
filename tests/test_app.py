@@ -1,4 +1,5 @@
 import pytest
+import streamlit as st
 import pandas as pd
 from main import user_input_features, make_prediction  # Import necessary functions
 
