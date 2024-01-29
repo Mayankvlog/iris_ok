@@ -20,13 +20,13 @@ jobs:
           command: |
             pytest
             # Save test results
-            echo "Your test results content" > /app/test-results.txt
+            echo "Your test results content" > /app/test-results.xml
 
       - persist_to_workspace:
           root: /app
           paths:
             - models/
-            - test-results.txt  # Make sure this path is correct
+            - test-results.xml  # Make sure this path is correct
 
   deploy:
     docker:
@@ -58,8 +58,8 @@ jobs:
           name: Store Test Results
           command: |
             mkdir -p /app/test-report
-            mv /app/test-results.txt /app/test-report/
-            echo "Found some test results!" > /app/test-report/test-results-info.txt
+            mv /app/test-results.xml /app/test-report/
+            echo "Found some test results!" > /app/test-report/test-results-info.xml
 
       - store_test_results:
           path: /app/test-report
