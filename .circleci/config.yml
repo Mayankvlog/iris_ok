@@ -18,6 +18,7 @@ jobs:
       - run:
           name: Run tests
           command: |
+            pip install pytest  # Install pytest
             pytest
 
       - persist_to_workspace:
@@ -51,6 +52,11 @@ jobs:
     steps:
       - attach_workspace:
           at: /app
+
+      - run:
+          name: Install pytest
+          command: |
+            pip install pytest
 
       - run:
           name: Store Test Results
@@ -106,4 +112,3 @@ workflows:
       - store_artifacts:
           requires:
             - deploy
-
