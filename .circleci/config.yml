@@ -18,13 +18,15 @@ jobs:
       - run:
           name: Run tests
           command: |
-            pip install pytest  # Install pytest
             pytest
+            # Save test results
+            echo "Your test results content" > /app/test-results.txt
 
       - persist_to_workspace:
           root: /app
           paths:
             - models/
+            - test-results.txt  # Make sure this path is correct
 
   deploy:
     docker:
@@ -42,7 +44,6 @@ jobs:
             # Add deployment commands here
             # e.g., streamlit run your_app.py
 
-
   store_test_results:
     docker:
       - image: python:3.8
@@ -52,11 +53,6 @@ jobs:
     steps:
       - attach_workspace:
           at: /app
-
-      - run:
-          name: Install pytest
-          command: |
-            pip install pytest
 
       - run:
           name: Store Test Results
@@ -88,7 +84,6 @@ jobs:
       - store_artifacts:
           path: /app/artifacts
 
-
 workflows:
   version: 2
   build_and_deploy:
@@ -105,7 +100,6 @@ workflows:
             branches:
               only:
                 - master
-                
       - store_test_results:
           requires:
             - build
