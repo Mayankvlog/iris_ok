@@ -16,6 +16,12 @@ jobs:
             pip install -r requirements.txt
 
       - run:
+          name: List Files
+          command: |
+            ls -R /app
+
+
+      - run:
           name: Run tests
           command: |
             pytest
