@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Run Tests
           command: |
-            pytest -v path/to/tests --junitxml=test-results/junit.xml
+            pytest -v tests --junitxml=test-results/junit.xml
 
       - store_test_results:
           path: test-results
