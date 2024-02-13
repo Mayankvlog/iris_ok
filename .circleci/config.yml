@@ -1,0 +1,67 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: python:3.8
+
+    working_directory: /app
+
+    steps:
+      - checkout
+
+      # Install dependencies
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements.txt
+
+      # Run tests and generate JUnit XML report
+      - run:
+          name: Run tests and generate JUnit XML report
+          command: |
+            pytest --junitxml=test-report/test-results.xml
+
+      # Persist test results and MLflow artifacts
+      - persist_to_workspace:
+          root: /app
+          paths:
+            - test-report/
+            - mlflow/
+
+  deploy:
+    docker:
+      - image: python:3.8
+
+    working_directory: /app
+
+    steps:
+      - checkout
+
+      # Install dependencies
+      - run:
+          name: Install dependencies
+          command: |
+            pip install -r requirements.txt
+
+      # Deploy the app using Streamlit
+      - run:
+          name: Deploy the app
+          command: streamlit run app.py
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
