@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Run tests and generate JUnit XML report
           command: |
-            pytest app --junitxml=/app/test-report/test-results.xml
+            pytest app --junitxml=test-report/test-results.xml
 
       # Persist test results and MLflow artifacts
       - persist_to_workspace:
