@@ -7,6 +7,11 @@ jobs:
     steps:
       - checkout
 
+       # List files in the directory
+      - run:
+          name: List Files
+          command: ls -l
+
       # Install dependencies
       - run:
           name: Install Dependencies
