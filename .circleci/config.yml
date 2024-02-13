@@ -41,6 +41,12 @@ jobs:
       - attach_workspace:
           at: /workspace
 
+
+      # Check if requirements.txt exists
+      - run:
+          name: Check Requirements.txt
+          command: test -e requirements.txt || (echo "File not found" && exit 1)
+
       # Install dependencies (adjust as needed)
       - run:
           name: Install Dependencies
