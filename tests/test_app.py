@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 import streamlit as st
-from app import user_input_features
+from main import user_input_features
 
 def test_user_input_features():
     # Mocking st.sidebar.slider with specific values
