@@ -12,11 +12,12 @@ def test_user_input_features():
     }[label]
     
     result = user_input_features()
+    # Update the expected column names
     expected_result = pd.DataFrame({
-        'Sepal Length': [5.0],
-        'Sepal Width': [3.5],
-        'Petal Length': [1.4],
-        'Petal Width': [0.2]
+        'Sepal_Length': [5.0],
+        'Sepal_Width': [3.5],
+        'Petal_Length': [1.4],
+        'Petal_Width': [0.2]
     })
     
     pd.testing.assert_frame_equal(result, expected_result)
