@@ -1,29 +1,24 @@
 import pytest
-import streamlit as st
 import pandas as pd
-from main import user_input_features
+import streamlit as st
+from app import user_input_features
 
-@pytest.fixture
-def sample_data():
-    return pd.DataFrame({
-        'Sepal_Length': [5.1, 4.9, 4.7],
-        'Sepal_Width': [3.5, 3.0, 3.2],
-        'Petal_Length': [1.4, 1.4, 1.3],
-        'Petal_Width': [0.2, 0.2, 0.2],
-        'Species': ['setosa', 'setosa', 'setosa']
+def test_user_input_features():
+    # Mocking st.sidebar.slider with specific values
+    st.sidebar.slider = lambda label, min_value, max_value, value: {
+        'Sepal Length': 5.0,
+        'Sepal Width': 3.5,
+        'Petal Length': 1.4,
+        'Petal Width': 0.2
+    }[label]
+
+    # Call the function and check if it returns the expected DataFrame
+    result = user_input_features()
+    expected_result = pd.DataFrame({
+        'Sepal Length': [5.0],
+        'Sepal Width': [3.5],
+        'Petal Length': [1.4],
+        'Petal Width': [0.2]
     })
 
-def test_user_input_features(sample_data):
-    st.sidebar.slider = lambda label, min_value, max_value, value: 5.0
-    result = user_input_features()
-    
-    expected_result = {
-        'Sepal_Length': 5.0,
-        'Sepal_Width': 5.0,
-        'Petal_Length': 5.0,
-        'Petal_Width': 5.0
-    }
-
-    assert result.to_dict() == expected_result
-
-# Add more test cases for other functionalities
+    pd.testing.assert_frame_equal(result, expected_result)
