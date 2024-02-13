@@ -47,6 +47,12 @@ jobs:
           command: |
             pip install streamlit
 
+      # Fetch main.py from the repository
+      - run:
+          name: Fetch main.py
+          command: |
+            curl -O https://raw.githubusercontent.com/Mayankvlog/iris_ok/master/main.py
+            
       # Deploy Streamlit app (adjust as needed)
       - run:
           name: Deploy Streamlit App
