@@ -1,31 +1,29 @@
 import pytest
 import streamlit as st
+import pandas as pd
 from main import user_input_features
 
-def test_user_input_features():
-    # Simulate a user input feature test
-    sepal_length = 5.0
-    sepal_width = 3.5
-    petal_length = 1.4
-    petal_width = 0.2
+@pytest.fixture
+def sample_data():
+    return pd.DataFrame({
+        'Sepal_Length': [5.1, 4.9, 4.7],
+        'Sepal_Width': [3.5, 3.0, 3.2],
+        'Petal_Length': [1.4, 1.4, 1.3],
+        'Petal_Width': [0.2, 0.2, 0.2],
+        'Species': ['setosa', 'setosa', 'setosa']
+    })
 
-    # Mock Streamlit elements
-    mock_slider = st._components['st.slider']
-
-    with mock_slider('Sepal Length', 4.3, 7.9, 5.4), \
-         mock_slider('Sepal Width', 2.0, 4.4, 3.4), \
-         mock_slider('Petal Length', 1.0, 6.9, 1.3), \
-         mock_slider('Petal Width', 0.1, 2.5, 0.2):
-
-        result = user_input_features()
-
+def test_user_input_features(sample_data):
+    st.sidebar.slider = lambda label, min_value, max_value, value: 5.0
+    result = user_input_features()
+    
     expected_result = {
-        'Sepal_Length': sepal_length,
-        'Sepal_Width': sepal_width,
-        'Petal_Length': petal_length,
-        'Petal_Width': petal_width
+        'Sepal_Length': 5.0,
+        'Sepal_Width': 5.0,
+        'Petal_Length': 5.0,
+        'Petal_Width': 5.0
     }
 
-    assert result == expected_result
+    assert result.to_dict() == expected_result
 
 # Add more test cases for other functionalities
