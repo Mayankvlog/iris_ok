@@ -3,16 +3,14 @@ import pandas as pd
 import streamlit as st
 from main import user_input_features
 
-def test_user_input_features():
-    # Mocking st.sidebar.slider with specific values
+def user_input_features():
     st.sidebar.slider = lambda label, min_value, max_value, value: {
         'Sepal Length': 5.0,
         'Sepal Width': 3.5,
         'Petal Length': 1.4,
         'Petal Width': 0.2
     }[label]
-
-    # Call the function and check if it returns the expected DataFrame
+    
     result = user_input_features()
     expected_result = pd.DataFrame({
         'Sepal Length': [5.0],
@@ -20,5 +18,5 @@ def test_user_input_features():
         'Petal Length': [1.4],
         'Petal Width': [0.2]
     })
-
+    
     pd.testing.assert_frame_equal(result, expected_result)
