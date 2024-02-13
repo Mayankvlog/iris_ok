@@ -47,7 +47,7 @@ jobs:
       # Deploy the app using Streamlit
       - run:
           name: Deploy the app
-          command: streamlit run app.py
+          command: streamlit run main.py
 
 workflows:
   version: 2
