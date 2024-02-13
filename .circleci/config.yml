@@ -41,6 +41,12 @@ jobs:
       - attach_workspace:
           at: /workspace
 
+      # Install Streamlit
+      - run:
+          name: Install Streamlit
+          command: |
+            pip install streamlit
+
       # Deploy Streamlit app (adjust as needed)
       - run:
           name: Deploy Streamlit App
