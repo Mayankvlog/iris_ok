@@ -1,53 +1,51 @@
 version: 2.1
-
 jobs:
   build:
     docker:
       - image: python:3.8
 
-    working_directory: /app
-
     steps:
       - checkout
 
       # Install dependencies
       - run:
-          name: Install dependencies
+          name: Install Dependencies
           command: |
             pip install -r requirements.txt
 
-      # Run tests and generate JUnit XML report
+      # Run pytest and store results
       - run:
-          name: Run tests and generate JUnit XML report
+          name: Run Tests
           command: |
-            pytest --junitxml=test-report/test-results.xml
+            pytest --junitxml=test-results/junit.xml
+      - store_test_results:
+          path: test-results
 
-      # Persist test results and MLflow artifacts
+      # Save artifacts (model.pkl)
       - persist_to_workspace:
-          root: /app
+          root: .
           paths:
-            - test-report/
-            - mlflow/
+            - models
 
   deploy:
     docker:
       - image: python:3.8
 
-    working_directory: /app
-
     steps:
-      - checkout
+      - attach_workspace:
+          at: /workspace
 
-      # Install dependencies
+      # Install dependencies (adjust as needed)
       - run:
-          name: Install dependencies
+          name: Install Dependencies
           command: |
             pip install -r requirements.txt
 
-      # Deploy the app using Streamlit
+      # Deploy Streamlit app (adjust as needed)
       - run:
-          name: Deploy the app
-          command: streamlit run main.py
+          name: Deploy Streamlit App
+          command: |
+            streamlit run main.py 
 
 workflows:
   version: 2
