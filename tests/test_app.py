@@ -9,11 +9,15 @@ def test_user_input_features():
     petal_length = 1.4
     petal_width = 0.2
 
-    # Simulate user input within the expected range
-    with pytest.raises(st.ScriptRunner.StopException):
-        with pytest.raises(SystemExit):
-            with unittest.mock.patch('streamlit.sidebar.slider', side_effect=[sepal_length, sepal_width, petal_length, petal_width]):
-                result = user_input_features()
+    # Mock Streamlit elements
+    mock_slider = st._components['st.slider']
+
+    with mock_slider('Sepal Length', 4.3, 7.9, 5.4), \
+         mock_slider('Sepal Width', 2.0, 4.4, 3.4), \
+         mock_slider('Petal Length', 1.0, 6.9, 1.3), \
+         mock_slider('Petal Width', 0.1, 2.5, 0.2):
+
+        result = user_input_features()
 
     expected_result = {
         'Sepal_Length': sepal_length,
