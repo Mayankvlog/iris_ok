@@ -57,7 +57,7 @@ jobs:
       - run:
           name: Deploy Streamlit App
           command: |
-            streamlit run main.py 
+            streamlit run main.py &
             sleep 5
 
 workflows:
