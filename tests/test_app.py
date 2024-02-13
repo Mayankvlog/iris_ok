@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 from main import user_input_features
 
-def user_input_features():
+def test_user_input_features():
     st.sidebar.slider = lambda label, min_value, max_value, value: {
         'Sepal Length': 5.0,
         'Sepal Width': 3.5,
