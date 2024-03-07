@@ -1,5 +1,4 @@
 version: 2.1
-
 jobs:
   build:
     docker:
@@ -22,15 +21,7 @@ jobs:
       - store_test_results:
           path: test-results
 
-      # Save plots as artifacts
-      - persist_to_workspace:
-          root: .
-          paths:
-            - scatter_plot.html
-            - pie_plot.html
-            - bar_plot.html
-            - line_plot.html
-
+      
   deploy:
     docker:
       - image: pulumi/pulumi
