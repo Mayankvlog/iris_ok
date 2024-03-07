@@ -39,7 +39,7 @@ jobs:
           name: Login to Pulumi
           command: |
             pulumi login
-            pulumi stack dev
+            pulumi stack select dev
 
       # Deploy with Pulumi
       - run:
