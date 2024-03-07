@@ -23,7 +23,7 @@ jobs:
       
   deploy:
     docker:
-      - image: pulumi/pulumi
+      - image: pulumi/pulumi:latest
 
     steps:
       - checkout
@@ -39,7 +39,7 @@ jobs:
           name: Login to Pulumi
           command: |
             pulumi login
-            pulumi stack select dev
+            pulumi stack select your_stack_name
 
       # Deploy with Pulumi
       - run:
