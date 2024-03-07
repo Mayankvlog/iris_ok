@@ -1,4 +1,5 @@
 version: 2.1
+
 jobs:
   build:
     docker:
@@ -25,7 +26,11 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            
+            - scatter_plot.html
+            - pie_plot.html
+            - bar_plot.html
+            - line_plot.html
+
   deploy:
     docker:
       - image: pulumi/pulumi
@@ -33,7 +38,7 @@ jobs:
     steps:
       - checkout
 
-    # Install Pulumi CLI
+      # Install Pulumi CLI
       - run:
           name: Install Pulumi CLI
           command: |
@@ -52,8 +57,6 @@ jobs:
           command: |
             pulumi up --yes
 
-
-            
 workflows:
   version: 2
   build_and_deploy:
@@ -70,4 +73,3 @@ workflows:
             branches:
               only:
                 - master
-    
