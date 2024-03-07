@@ -1,2 +1,0 @@
-config:
-  pulumi:template: auth0-python
