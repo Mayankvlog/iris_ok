@@ -33,6 +33,26 @@ jobs:
     steps:
       - checkout
 
+    # Install Pulumi CLI
+      - run:
+          name: Install Pulumi CLI
+          command: |
+            curl -fsSL https://get.pulumi.com | sh
+
+      # Login to Pulumi
+      - run:
+          name: Login to Pulumi
+          command: |
+            pulumi login
+            pulumi stack dev
+
+      # Deploy with Pulumi
+      - run:
+          name: Deploy with Pulumi
+          command: |
+            pulumi up --yes
+
+
             
 workflows:
   version: 2
