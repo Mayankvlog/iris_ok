@@ -23,30 +23,28 @@ jobs:
       
   deploy:
     docker:
-      - image: pulumi/pulumi:latest
+      - image: cimg/python:3.8
 
     steps:
       - checkout
 
-      # Install Pulumi CLI
-      - run:
-          name: Install Pulumi CLI
-          command: |
-            curl -fsSL https://get.pulumi.com | sh
+      - setup_remote_docker:
+          docker_layer_caching: False
 
-      # Login to Pulumi
       - run:
-          name: Login to Pulumi
+          name: Build docker image 
           command: |
-            pulumi login
-            pulumi stack select your_stack_name
+            docker build -t tirsaapp -t mayank035/irisapp:latest .
+            echo $DOCKERHUB_PASSWORD | docker login -u mayank035 --password-stdin
+            docker push mayank035/irisapp:latest
+            docker pull mayank035/irisapp:latest
 
-      # Deploy with Pulumi
       - run:
-          name: Deploy with Pulumi
+          name: Deploy Docker image to localhost
           command: |
-            pulumi up --yes
-
+            CONTAINER_ID=$(docker run -d -p 8080:80 mayank035/irisapp:latest)
+            echo "Container ID: $CONTAINER_ID"
+            docker logs $CONTAINER_ID
 workflows:
   version: 2
   build_and_deploy:
