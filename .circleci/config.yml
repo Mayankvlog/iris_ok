@@ -23,7 +23,7 @@ jobs:
 
   deploy:
     docker:
-      - image: mayank035/irisapp
+      - image: cimg/python:3.8
     steps:
       - checkout
       - setup_remote_docker:
