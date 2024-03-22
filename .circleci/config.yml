@@ -23,7 +23,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/python:3.8
+      - image: mayank035/irisapp
     steps:
       - checkout
       - setup_remote_docker:
@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Build docker image 
           command: |
-            docker build -t toyotaapp -t mayank035/irisapp:latest .
+            docker build -t irisapp -t mayank035/irisapp:latest .
             echo $DOCKERHUB_PASSWORD | docker login -u mayank035 --password-stdin
             docker push mayank035/irisapp:latest            
 workflows:
