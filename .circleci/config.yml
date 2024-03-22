@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: cimg/python:3.8
+ 
     steps:
       - checkout
 
@@ -19,31 +20,20 @@ jobs:
             pytest -v --junitxml=test-results/junit.xml
       - store_test_results:
           path: test-results
-      
+
   deploy:
     docker:
       - image: cimg/python:3.8
-
     steps:
       - checkout
-
       - setup_remote_docker:
-          docker_layer_caching: False
-
+          docker_layer_caching: True
       - run:
           name: Build docker image 
           command: |
-            docker build -t tirsaapp -t mayank035/irisapp:latest .
+            docker build -t toyotaapp -t mayank035/irisapp:latest .
             echo $DOCKERHUB_PASSWORD | docker login -u mayank035 --password-stdin
-            docker push mayank035/irisapp:latest
-            docker pull mayank035/irisapp:latest
-
-      - run:
-          name: Deploy Docker image to localhost
-          command: |
-            CONTAINER_ID=$(docker run -d -p 8080:80 mayank035/irisapp:latest)
-            echo "Container ID: $CONTAINER_ID"
-            docker logs $CONTAINER_ID
+            docker push mayank035/irisapp:latest            
 workflows:
   version: 2
   build_and_deploy:
@@ -53,6 +43,9 @@ workflows:
             branches:
               only:
                 - master
+          post-steps:
+            - store_artifacts:
+                path: test-results
       - deploy:
           requires:
             - build
